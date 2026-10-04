@@ -1,0 +1,1 @@
+export const site={name:'DualByte',url:'https://dualbyte.dev',email:'hola@dualbyte.dev',instagram:'https://instagram.com/dualbyte',github:'https://github.com/dualbyte',whatsapp:'https://wa.me/540000000000'}

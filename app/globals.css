@@ -1,0 +1,9 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+:root{--bg:#f9f9f6;--fg:#16171a;--mut:#6a6b70;--line:#e4e4de;--card:#fff;--ac:#2563eb}
+.dark{--bg:#101114;--fg:#f1f1ed;--mut:#9b9ca2;--line:#272830;--card:#17181c;--ac:#7ea0ff}
+html{background:var(--bg);color:var(--fg);scroll-behavior:auto}
+body{font-family:var(--f-sans),system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:6px}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.dark-sec{--bg:#101114;--fg:#f1f1ed;--mut:#9b9ca2;--line:#272830;--ac:#7ea0ff;background:var(--bg);color:var(--fg)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
