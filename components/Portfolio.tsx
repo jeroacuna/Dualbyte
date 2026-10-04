@@ -6,7 +6,7 @@ import {AnimatePresence,motion} from 'motion/react'
 import {projects,filters,type Project} from '@/data/projects'
 import Reveal from './Reveal'
 export function Mock({p,big}:{p:Project;big?:boolean}){
-if(p.image)return <Image src={p.image} alt={`Imagen principal de ${p.name}`} width={1600} height={1000} className="h-full w-full rounded-2xl object-cover"/>
+if(p.image)return <div className={`relative overflow-hidden rounded-2xl ${big?'aspect-[16/9]':'aspect-[16/10]'}`}><Image src={p.image} alt={`Captura de ${p.name}`} fill sizes="(min-width:768px) 50vw,100vw" className="object-cover object-top"/></div>
 return(<div role="img" aria-label={`Vista previa de ${p.name} (placeholder, reemplazar con captura real)`} className={`relative overflow-hidden rounded-2xl ${big?'aspect-[16/9]':'aspect-[4/3]'}`} style={{background:`linear-gradient(135deg,hsl(${p.hue} 60% 90%),hsl(${p.hue+40} 50% 80%))`}}>
 <div className="absolute inset-[12%] rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur"><div className="h-2 w-1/3 rounded bg-black/15"/><div className="mt-3 grid grid-cols-3 gap-2">{[0,1,2].map(i=><div key={i} className="h-12 rounded bg-black/10 md:h-20"/>)}</div></div></div>)}
 export default function Portfolio(){
