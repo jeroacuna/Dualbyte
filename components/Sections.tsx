@@ -1,7 +1,7 @@
 'use client'
 import {useRef,useState} from 'react'
 import {motion,useScroll,useTransform} from 'motion/react'
-import {Globe,AppWindow,Smartphone,PenTool,Cpu,Sparkles,Instagram,Github,Mail,MessageCircle} from 'lucide-react'
+import {Globe,AppWindow,Smartphone,PenTool,Cpu,Sparkles,Github,Mail,MessageCircle} from 'lucide-react'
 import Reveal from './Reveal'
 import Magnetic from './Magnetic'
 import Avatar from './Avatar'
@@ -15,8 +15,8 @@ export function About(){return(<section id="about" className={`${wrap} py-28`}><
 <p>Tenemos proyectos para clientes, proyectos propios y otros que empezaron porque queríamos ver hasta dónde podíamos llegar.</p>
 <p>Trabajamos con pocas manos y mucho cuidado: charlamos la idea, la diseñamos, la construimos y la pulimos hasta que los detalles estén bien. Nos atraen los desafíos y las tecnologías nuevas, y cada proyecto nos deja algo para el siguiente.</p></div></Reveal></div></section>)}
 export function Duo(){return(<section id="duo" className="border-y border-line py-28"><div className={wrap}><Reveal><h2 className={h2}>The duo.</h2></Reveal>
-<div className="mt-12 grid gap-8 md:grid-cols-2">{[['Jerónimo',210,['Building interfaces','Turning ideas into products']],['Bautista',270,['Solving problems','Always learning']]].map(([n,h,t],i)=>
-<Reveal key={n as string} d={i*.12}><Avatar name={n as string} role="Developer" hue={h as number}/><h3 className="mt-5 text-3xl font-semibold">{n as string}</h3><p className="text-mut">Developer</p>
+<div className="mt-12 grid gap-8 md:grid-cols-2">{[['Jerónimo',210,['Building interfaces','Turning ideas into products'],site.team[0].github],['Bautista',270,['Solving problems','Always learning'],site.team[1].github]].map(([n,h,t,g],i)=>
+<Reveal key={n as string} d={i*.12}><Avatar name={n as string} role="Developer" hue={h as number}/><h3 className="mt-5 text-3xl font-semibold">{n as string}</h3><p className="text-mut">Developer · <a href={g as string} className="underline-offset-4 hover:text-ac hover:underline" aria-label={`GitHub de ${n as string}`}>GitHub</a></p>
 <div className="mt-3 flex flex-wrap gap-2">{(t as string[]).map(x=><span key={x} className="rounded-full border border-line px-3 py-1 text-sm">{x}</span>)}</div></Reveal>)}</div></div></section>)}
 const services=[[Globe,'Web development','Sitios rápidos, claros y hechos a medida.'],[AppWindow,'Web apps','Herramientas web para gestionar tu negocio.'],[Smartphone,'PWAs','Apps que se instalan desde el navegador.'],[PenTool,'UI/UX','Interfaces pensadas desde quien las usa.'],[Cpu,'Custom software','Software a medida para problemas concretos.'],[Sparkles,'Digital experiences','Interacciones y detalles que se recuerdan.']] as const
 export function Services(){return(<section id="services" className={`${wrap} py-28`}><Reveal><h2 className={h2}>Qué hacemos.</h2></Reveal>
@@ -42,14 +42,14 @@ export function Why(){return(<section className={`${wrap} py-28`}><Reveal><h2 cl
 <Reveal key={t} d={(i%2)*.1}><div className="border-t border-line pt-5"><h3 className="text-xl font-semibold">{t}</h3><p className="mt-1 text-mut">{d}</p></div></Reveal>)}</div></section>)}
 export function FinalCta(){return(<section className="dark-sec py-32 text-center"><div className={wrap}><Reveal><h2 className="text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-none tracking-tighter">¿Qué podemos construir juntos?</h2>
 <p className="mx-auto mt-6 max-w-md text-lg text-mut">Contanos tu idea. Te respondemos nosotros, no un formulario.</p>
-<div className="mt-10 flex flex-wrap justify-center gap-3"><Magnetic><a href="#contact" className="block rounded-full bg-fg px-7 py-3.5 text-bg">Start a project</a></Magnetic><Magnetic><a href={`mailto:${site.email}`} className="block rounded-full border border-line px-7 py-3.5">Contact us</a></Magnetic></div></Reveal></div></section>)}
+<div className="mt-10 flex flex-wrap justify-center gap-3"><Magnetic><a href="#contact" className="block rounded-full bg-fg px-7 py-3.5 text-bg">Start a project</a></Magnetic><Magnetic><a href={`mailto:${site.emails.join(',')}`} className="block rounded-full border border-line px-7 py-3.5">Contact us</a></Magnetic></div></Reveal></div></section>)}
 const inp='w-full rounded-xl border border-line bg-card px-4 py-3 outline-none focus:border-ac'
 export function Contact(){
 const [st,setSt]=useState<'idle'|'sending'|'ok'>('idle')
 async function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const f=e.currentTarget;const d=Object.fromEntries(new FormData(f)) as Record<string,string>
 setSt('sending');await sendLead({name:d.name,email:d.email,company:d.company,type:d.type,budget:d.budget,message:d.message});setSt('ok');f.reset()}
 return(<section id="contact" className={`${wrap} grid gap-12 py-28 md:grid-cols-[1fr_1.2fr]`}><div><h2 className={h2}>Hablemos.</h2><p className="mt-4 text-lg text-mut">Contanos qué querés construir.</p>
-<ul className="mt-8 space-y-3">{[[Mail,site.email,`mailto:${site.email}`],[Instagram,'Instagram',site.instagram],[Github,'GitHub',site.github],[MessageCircle,'WhatsApp',site.whatsapp]].map(([I,l,h])=>{const Ic=I as typeof Mail;return <li key={l as string}><a href={h as string} className="flex items-center gap-3 hover:text-ac"><Ic size={18}/>{l as string}</a></li>})}</ul></div>
+<ul className="mt-8 space-y-3">{[...site.emails.map(e=>[Mail,e,`mailto:${e}`]),...site.team.map(t=>[Github,`GitHub · ${t.name}`,t.github]),...(site.whatsapp?[[MessageCircle,'WhatsApp',site.whatsapp]]:[])].map(([I,l,h])=>{const Ic=I as typeof Mail;return <li key={l as string}><a href={h as string} className="flex items-center gap-3 hover:text-ac"><Ic size={18}/>{l as string}</a></li>})}</ul></div>
 <form onSubmit={submit} className="space-y-4"><div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm">Nombre<input required name="name" className={inp}/></label><label className="block text-sm">Email<input required type="email" name="email" className={inp}/></label></div>
 <label className="block text-sm">Empresa (opcional)<input name="company" className={inp}/></label>
 <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm">Tipo de proyecto<select name="type" className={inp}>{['Sitio web','Web app','PWA','UI/UX','Otro'].map(o=><option key={o}>{o}</option>)}</select></label>
