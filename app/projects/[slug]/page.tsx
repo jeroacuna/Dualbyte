@@ -10,7 +10,7 @@ export async function generateMetadata({params}:P):Promise<Metadata>{const {slug
 export default async function Page({params}:P){
 const {slug}=await params;const p=projects.find(x=>x.slug===slug);if(!p)notFound()
 const i=projects.indexOf(p);const next=projects[(i+1)%projects.length]
-return(<article className="mx-auto max-w-6xl px-5 pb-24 pt-32 md:px-8">
+return(<article className="wrap pb-24 pt-32">
 <Link href="/#projects" className="text-sm text-mut hover:text-fg">← Volver a proyectos</Link>
 <h1 className="mt-6 text-5xl font-semibold tracking-tight md:text-8xl">{p.name}</h1>
 <p className="mt-4 max-w-xl text-lg text-mut">{p.summary}</p>

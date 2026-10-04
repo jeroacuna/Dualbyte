@@ -7,7 +7,7 @@ import Magnetic from './Magnetic'
 import Avatar from './Avatar'
 import {sendLead} from '@/lib/send'
 import {site} from '@/lib/site'
-const wrap='mx-auto max-w-6xl px-5 md:px-8'
+const wrap='wrap'
 const h2='text-4xl font-semibold tracking-tight md:text-6xl'
 export function About(){return(<section id="about" className={`${wrap} py-28`}><div className="grid gap-12 md:grid-cols-2">
 <Reveal><h2 className={h2}>Dos programadores. Una cantidad innecesaria de ideas.</h2></Reveal>

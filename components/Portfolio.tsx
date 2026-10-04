@@ -11,7 +11,7 @@ return(<div role="img" aria-label={`Vista previa de ${p.name} (placeholder, reem
 <div className="absolute inset-[12%] rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur"><div className="h-2 w-1/3 rounded bg-black/15"/><div className="mt-3 grid grid-cols-3 gap-2">{[0,1,2].map(i=><div key={i} className="h-12 rounded bg-black/10 md:h-20"/>)}</div></div></div>)}
 export default function Portfolio(){
 const [f,setF]=useState<string>('ALL');const list=projects.filter(p=>f==='ALL'||p.category===f)
-return(<section id="projects" className="mx-auto max-w-6xl px-5 py-28 md:px-8">
+return(<section id="projects" className="wrap py-28">
 <Reveal><h2 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-7xl">Cosas que construimos.</h2></Reveal>
 <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filtrar proyectos">{filters.map(x=><button key={x} aria-pressed={f===x} onClick={()=>setF(x)} className={`rounded-full border px-4 py-1.5 text-sm transition ${f===x?'border-fg bg-fg text-bg':'border-line text-mut hover:text-fg'}`}>{x}</button>)}</div>
 <motion.div layout className="mt-10 grid gap-8 md:grid-cols-2"><AnimatePresence mode="popLayout">{list.map((p,i)=>

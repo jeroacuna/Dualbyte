@@ -6,8 +6,8 @@ const lines=['Dos mentes.','Un mismo código.']
 export default function Hero(){
 const mx=useSpring(useMotionValue(0),{stiffness:60,damping:20});const my=useSpring(useMotionValue(0),{stiffness:60,damping:20})
 const rx=useTransform(mx,v=>v*-24);const ry=useTransform(my,v=>v*-24)
-return(<section className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pt-20 md:px-8" onMouseMove={e=>{mx.set(e.clientX/innerWidth-.5);my.set(e.clientY/innerHeight-.5)}}>
-<div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
+return(<section className="relative flex min-h-[100svh] items-center overflow-hidden pt-20" onMouseMove={e=>{mx.set(e.clientX/innerWidth-.5);my.set(e.clientY/innerHeight-.5)}}>
+<div className="wrap grid w-full items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
 <div><h1 className="text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[.95] tracking-tighter">
 {lines.map((l,i)=><span key={l} className="block overflow-hidden pb-2"><motion.span className="block" initial={{y:'110%'}} animate={{y:0}} transition={{delay:1.9+i*.12,duration:.9,ease:[.22,1,.36,1]}}>{l}</motion.span></span>)}</h1>
 <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2.5}} className="mt-8 max-w-md text-lg text-mut">Somos Jerónimo y Bautista. Diseñamos y programamos sitios, apps y productos a medida, y trabajás directo con quienes los construyen.</motion.p>
