@@ -8,10 +8,23 @@ import {Footer} from '@/components/Sections'
 import {site} from '@/lib/site'
 const sans=Space_Grotesk({subsets:['latin'],variable:'--f-sans',display:'swap'})
 const mono=JetBrains_Mono({subsets:['latin'],variable:'--f-mono',display:'swap'})
-const desc='Estudio de dos programadores. Diseñamos y construimos sitios web, apps y productos digitales a medida.'
-export const metadata:Metadata={metadataBase:new URL(site.url),title:{default:'DualByte — Estudio de desarrollo de software',template:'%s · DualByte'},description:desc,
-openGraph:{title:'DualByte',description:desc,url:site.url,siteName:'DualByte',locale:'es_AR',type:'website'},icons:{icon:'/icon.svg'}}
+const desc='DualByte es un estudio de desarrollo web y software en Paraná, Entre Ríos. Diseñamos y programamos sitios web, aplicaciones web, PWAs y software a medida.'
+export const metadata:Metadata={
+metadataBase:new URL(site.url),
+title:{default:'DualByte — Estudio de desarrollo web y software en Paraná',template:'%s · DualByte'},
+description:desc,
+keywords:['DualByte','Dual Byte','desarrollo web','desarrollo de software','diseño web','páginas web','aplicaciones web','PWA','software a medida','Paraná','Entre Ríos','Argentina'],
+authors:[{name:'Jerónimo'},{name:'Bautista'}],
+alternates:{canonical:'/'},
+robots:{index:true,follow:true},
+openGraph:{title:'DualByte — Estudio de desarrollo web y software',description:desc,url:'/',siteName:'DualByte',locale:'es_AR',type:'website'},
+twitter:{card:'summary_large_image',title:'DualByte — Estudio de desarrollo web y software',description:desc},
+icons:{icon:'/icon.svg'},
+// verification:{google:'PEGAR_ACA_EL_CODIGO_DE_SEARCH_CONSOLE'},
+}
+const jsonLd={'@context':'https://schema.org','@type':'Organization',name:'DualByte',url:site.url,description:desc,email:site.emails[0],areaServed:'AR',
+founder:site.team.map(t=>({'@type':'Person',name:t.name,sameAs:t.github})),sameAs:site.team.map(t=>t.github)}
 const themeScript=`try{var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}`
 export default function RootLayout({children}:{children:React.ReactNode}){
-return(<html lang="es" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{__html:themeScript}}/></head>
-<body><Loader/><Smooth/><Navbar/><main>{children}</main><Footer/></body></html>)}
+return(<html lang="es-AR" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{__html:themeScript}}/></head>
+<body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Loader/><Smooth/><Navbar/><main>{children}</main><Footer/></body></html>)}
