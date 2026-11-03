@@ -5,6 +5,7 @@ import Image from 'next/image'
 import {AnimatePresence,motion} from 'motion/react'
 import {projects,filters,type Project} from '@/data/projects'
 import Reveal from './Reveal'
+import Tilt from './Tilt'
 export function Mock({p,big}:{p:Project;big?:boolean}){
 if(p.image)return <div className={`relative overflow-hidden rounded-2xl aspect-[19/10]`}><Image src={p.image} alt={`Captura de ${p.name}`} fill sizes={big?'100vw':'(min-width:768px) 50vw,100vw'} quality={90} className="object-cover object-top"/></div>
 return(<div role="img" aria-label={`Vista previa de ${p.name} (placeholder, reemplazar con captura real)`} className={`relative overflow-hidden rounded-2xl aspect-[19/10]`} style={{background:`linear-gradient(135deg,hsl(${p.hue} 60% 90%),hsl(${p.hue+40} 50% 80%))`}}>
@@ -20,6 +21,6 @@ return(<section id="projects" className="wrap py-28">
 <p className="mt-4 font-mono text-xs text-mut" aria-live="polite">{f==='ALL'?'// destacados · filtrá por categoría para ver más':`// ${list.length} ${list.length===1?'proyecto':'proyectos'} en ${f}`}</p>
 <motion.div layout className="mt-8 grid gap-8 md:grid-cols-2"><AnimatePresence mode="popLayout">{list.length===0&&<p key="empty" className="text-mut">Todavía no hay proyectos en esta categoría.</p>}{list.map((p,i)=>
 <motion.div layout key={p.slug} initial={{opacity:0,scale:.95}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:.95}} transition={{duration:.4}} className={i===0&&bigFirst?'md:col-span-2':''}>
-<Link href={`/projects/${p.slug}`} className="group block"><div className="hud-h overflow-hidden rounded-2xl"><div className="transition duration-700 group-hover:scale-[1.04]"><Mock p={p} big={i===0&&bigFirst}/></div></div>
+<Link href={`/projects/${p.slug}`} className="group block"><Tilt><div className="hud-h overflow-hidden rounded-2xl"><div className="transition duration-700 group-hover:scale-[1.04]"><Mock p={p} big={i===0&&bigFirst}/></div></div></Tilt>
 <div className="mt-4 flex items-baseline justify-between gap-4"><h3 className="text-2xl font-semibold tracking-tight md:text-3xl"><span className="mr-3 font-mono text-sm font-normal text-ac">0{i+1}</span>{p.name}</h3><span className="rounded-full border border-line px-3 py-0.5 font-mono text-xs text-mut">{p.category}</span></div>
 <p className="mt-1 text-mut">{p.summary}</p></Link></motion.div>)}</AnimatePresence></motion.div></section>)}

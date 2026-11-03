@@ -31,7 +31,7 @@ export function Challenges(){
 const r=useRef(null);const {scrollYProgress}=useScroll({target:r,offset:['start end','end start']})
 const x=useTransform(scrollYProgress,[0,1],['10%','-30%']);const n=useTransform(scrollYProgress,[0,.6],[0,100])
 const [v,setV]=useState(0);n.on('change',l=>setV(Math.round(l)))
-return(<section ref={r} className="dark-sec overflow-hidden py-28 md:py-40"><div className={wrap}>
+return(<section ref={r} className="dark-sec relative overflow-hidden py-28 md:py-40"><div className="grid-bg absolute inset-0" aria-hidden/><div className="glow absolute inset-0" aria-hidden/><div className={`${wrap} relative`}>
 <p className="text-[15vw] font-semibold leading-[.95] tracking-tighter md:hidden" aria-hidden>We like<br/>hard<br/>problems.</p>
 <motion.p style={{x}} className="hidden whitespace-nowrap text-[clamp(4rem,16vw,14rem)] font-semibold leading-none tracking-tighter md:block" aria-hidden>We like hard problems.</motion.p>
 <h2 className="sr-only">We like hard problems.</h2>
@@ -40,7 +40,7 @@ return(<section ref={r} className="dark-sec overflow-hidden py-28 md:py-40"><div
 export function Why(){return(<section className={`${wrap} py-28`}><Reveal><h2 className={h2}>Por qué DualByte.</h2></Reveal>
 <div className="mt-12 grid gap-x-12 gap-y-8 md:grid-cols-2">{[['Comunicación directa','Hablás con quienes escriben el código, sin intermediarios.'],['Atención al detalle','Espaciados, tiempos, estados vacíos: lo chico también cuenta.'],['Soluciones a medida','Partimos de tu caso, no de una plantilla.'],['Mentalidad de producto','Pensamos en quién lo usa y para qué.'],['Aprendizaje constante','Si el proyecto lo pide, lo aprendemos.'],['Compromiso','Tu proyecto es uno de pocos: le dedicamos atención real.']].map(([t,d],i)=>
 <Reveal key={t} d={(i%2)*.1}><div className="border-t border-line pt-5"><h3 className="text-xl font-semibold">{t}</h3><p className="mt-1 text-mut">{d}</p></div></Reveal>)}</div></section>)}
-export function FinalCta(){return(<section className="dark-sec py-32 text-center"><div className={wrap}><Reveal><h2 className="text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-none tracking-tighter">¿Qué podemos construir juntos?</h2>
+export function FinalCta(){return(<section className="dark-sec relative overflow-hidden py-32 text-center"><div className="grid-bg absolute inset-0" aria-hidden/><div className="glow absolute inset-0" aria-hidden/><div className={`${wrap} relative`}><Reveal><h2 className="text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-none tracking-tighter">¿Qué podemos construir juntos?</h2>
 <p className="mx-auto mt-6 max-w-md text-lg text-mut">Contanos tu idea. Te respondemos nosotros, no un formulario.</p>
 <div className="mt-10 flex flex-wrap justify-center gap-3"><Magnetic><a href="#contact" className="block rounded-full bg-fg px-7 py-3.5 text-bg">Start a project</a></Magnetic><Magnetic><a href={`mailto:${site.emails.join(',')}`} className="block rounded-full border border-line px-7 py-3.5">Contact us</a></Magnetic></div></Reveal></div></section>)}
 const inp='w-full rounded-xl border border-line bg-card px-4 py-3 outline-none focus:border-ac'
