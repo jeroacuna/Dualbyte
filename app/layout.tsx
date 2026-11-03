@@ -1,8 +1,9 @@
-import type {Metadata} from 'next'
+import type {Metadata,Viewport} from 'next'
 import {Space_Grotesk,JetBrains_Mono} from 'next/font/google'
 import './globals.css'
 import Loader from '@/components/Loader'
 import Smooth from '@/components/Smooth'
+import Backdrop from '@/components/Backdrop'
 import Navbar from '@/components/Navbar'
 import {Footer} from '@/components/Sections'
 import {site} from '@/lib/site'
@@ -17,14 +18,16 @@ keywords:['DualByte','Dual Byte','desarrollo web','desarrollo de software','dise
 authors:[{name:'Jerónimo'},{name:'Bautista'}],
 alternates:{canonical:'/'},
 robots:{index:true,follow:true},
-openGraph:{title:'DualByte — Estudio de desarrollo web y software',description:desc,url:'/',siteName:'DualByte',locale:'es_AR',type:'website'},
-twitter:{card:'summary_large_image',title:'DualByte — Estudio de desarrollo web y software',description:desc},
-icons:{icon:'/icon.svg'},
+openGraph:{title:'DualByte — Estudio de desarrollo web y software',description:desc,url:'/',siteName:'DualByte',locale:'es_AR',type:'website',images:[{url:'/logo/og.png',width:1200,height:630,alt:'DualByte — Estudio de desarrollo web y software'}]},
+twitter:{card:'summary_large_image',title:'DualByte — Estudio de desarrollo web y software',description:desc,images:['/logo/og.png']},
+icons:{icon:[{url:'/logo/favicon.ico',sizes:'any'},{url:'/logo/icon.png',type:'image/png',sizes:'512x512'}],apple:'/logo/apple-icon.png'},
 // verification:{google:'PEGAR_ACA_EL_CODIGO_DE_SEARCH_CONSOLE'},
 }
-const jsonLd={'@context':'https://schema.org','@type':'Organization',name:'DualByte',url:site.url,description:desc,email:site.emails[0],areaServed:'AR',
+export const viewport:Viewport={themeColor:'#2b3161'}
+const logo=`${site.url}/logo/logo-512.png`
+const jsonLd={'@context':'https://schema.org','@type':'Organization',name:'DualByte',url:site.url,logo,image:logo,description:desc,email:site.emails[0],areaServed:'AR',
 founder:site.team.map(t=>({'@type':'Person',name:t.name,sameAs:t.github})),sameAs:site.team.map(t=>t.github)}
 const themeScript=`try{var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}`
 export default function RootLayout({children}:{children:React.ReactNode}){
 return(<html lang="es-AR" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{__html:themeScript}}/></head>
-<body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Loader/><Smooth/><Navbar/><main>{children}</main><Footer/></body></html>)}
+<body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Loader/><Smooth/><Backdrop/><Navbar/><main>{children}</main><Footer/></body></html>)}

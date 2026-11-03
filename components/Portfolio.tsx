@@ -15,7 +15,7 @@ const [f,setF]=useState<string>('ALL')
 const list=projects.filter(p=>f==='ALL'?p.featured:p.category===f)
 const bigFirst=list.length>1&&list.length%2===1 // si la cantidad es impar, el primero ocupa todo el ancho
 return(<section id="projects" className="wrap py-28">
-<Reveal><h2 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-7xl">Cosas que construimos.</h2></Reveal>
+<Reveal><h2 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-7xl">Proyectos realizados.</h2></Reveal>
 <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filtrar proyectos">{filters.map(x=><button key={x} aria-pressed={f===x} onClick={()=>setF(x)} className={`rounded-full border px-4 py-1.5 text-sm transition ${f===x?'border-fg bg-fg text-bg':'border-line text-mut hover:text-fg'}`}>{x}</button>)}</div>
 <p className="mt-4 font-mono text-xs text-mut" aria-live="polite">{f==='ALL'?'// destacados · filtrá por categoría para ver más':`// ${list.length} ${list.length===1?'proyecto':'proyectos'} en ${f}`}</p>
 <motion.div layout className="mt-8 grid gap-8 md:grid-cols-2"><AnimatePresence mode="popLayout">{list.length===0&&<p key="empty" className="text-mut">Todavía no hay proyectos en esta categoría.</p>}{list.map((p,i)=>

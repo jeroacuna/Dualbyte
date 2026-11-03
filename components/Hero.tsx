@@ -1,19 +1,14 @@
 'use client'
-import {useRef} from 'react'
 import Link from 'next/link'
 import {motion,useMotionValue,useSpring,useTransform} from 'motion/react'
 import Magnetic from './Magnetic'
 const lines=['Dos mentes.','Un mismo código.']
 export default function Hero(){
-const ref=useRef<HTMLElement>(null)
 const mx=useSpring(useMotionValue(0),{stiffness:60,damping:20});const my=useSpring(useMotionValue(0),{stiffness:60,damping:20})
 const rx=useTransform(mx,v=>v*-24);const ry=useTransform(my,v=>v*-24)
 function move(e:React.MouseEvent<HTMLElement>){
-mx.set(e.clientX/innerWidth-.5);my.set(e.clientY/innerHeight-.5)
-const b=e.currentTarget.getBoundingClientRect()
-ref.current?.style.setProperty('--mx',`${e.clientX-b.left}px`);ref.current?.style.setProperty('--my',`${e.clientY-b.top}px`)}
-return(<section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden pt-20" onMouseMove={move}>
-<div className="grid-bg absolute inset-0" aria-hidden/><div className="glow absolute inset-0" aria-hidden/>
+mx.set(e.clientX/innerWidth-.5);my.set(e.clientY/innerHeight-.5)}
+return(<section className="relative flex min-h-[100svh] items-center overflow-hidden pt-20" onMouseMove={move}>
 <div className="wrap relative grid w-full items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
 <div>
 <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:1.8}} className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-line bg-card/60 px-3.5 py-1.5 font-mono text-xs text-mut backdrop-blur"><i className="pulse-dot"/>disponibles para nuevos proyectos</motion.p>
