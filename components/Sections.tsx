@@ -1,7 +1,7 @@
 'use client'
 import {useRef,useState} from 'react'
 import {motion,useScroll,useTransform} from 'motion/react'
-import {Globe,AppWindow,Smartphone,PenTool,Cpu,Sparkles,Github,Mail,MessageCircle} from 'lucide-react'
+import {Globe,AppWindow,Smartphone,PenTool,Cpu,Sparkles,Github,Mail,MessageCircle,ChevronDown} from 'lucide-react'
 import Reveal from './Reveal'
 import Magnetic from './Magnetic'
 import {sendLead} from '@/lib/send'
@@ -24,7 +24,7 @@ function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const d=O
 const t=['Hola DualByte! Quiero pedir una demo.','',`Rubro: ${d.rubro}`,`Negocio: ${d.negocio}`,d.necesito?`Qué necesito: ${d.necesito}`:false].filter(l=>l!==false).join('\n')
 const u=wa(t);const w=window.open(u,'_blank','noopener,noreferrer');if(!w)window.location.href=u}
 return(<div className="mt-16"><h3 className="text-2xl font-semibold md:text-3xl">Pedí tu demo</h3><p className="mt-1 text-mut">Contanos tu rubro y tu negocio, y seguimos por WhatsApp.</p>
-<form onSubmit={submit} className="mt-6 grid gap-4 md:grid-cols-2"><label className="block text-sm">Rubro<select name="rubro" className={inp}>{['Gimnasio','Barbería','Club o complejo de pádel','Tienda','Gastronomía (café, restaurante)','Otro'].map(o=><option key={o}>{o}</option>)}</select></label>
+<form onSubmit={submit} className="mt-6 grid gap-4 md:grid-cols-2"><label className="block text-sm">Rubro<Sel name="rubro" options={['Gimnasio','Barbería','Club o complejo de pádel','Tienda','Gastronomía (café, restaurante)','Otro']}/></label>
 <label className="block text-sm">Nombre del negocio<input required name="negocio" className={inp}/></label>
 <label className="block text-sm md:col-span-2">¿Qué necesitás? (opcional)<input name="necesito" className={inp}/></label>
 <button className="w-fit rounded-full bg-fg px-7 py-3.5 text-bg">Pedir demo por WhatsApp</button></form></div>)}
@@ -55,6 +55,8 @@ export function FinalCta(){return(<section className="dark-sec relative overflow
 <p className="mx-auto mt-6 max-w-md text-lg text-mut">Contanos tu idea. Te respondemos nosotros, no un formulario.</p>
 <div className="mt-10 flex flex-wrap justify-center gap-3"><Magnetic><a href="#contact" className="block rounded-full bg-fg px-7 py-3.5 text-bg">Start a project</a></Magnetic><Magnetic><a href={`mailto:${site.emails.join(',')}`} className="block rounded-full border border-line px-7 py-3.5">Contact us</a></Magnetic></div></Reveal></div></section>)}
 const inp='w-full rounded-xl border border-line bg-card px-4 py-3 outline-none focus:border-ac'
+// Select con flecha propia (sin la flecha nativa del navegador).
+function Sel({name,options}:{name:string;options:string[]}){return(<div className="relative"><select name={name} className={`${inp} appearance-none pr-11`}>{options.map(o=><option key={o}>{o}</option>)}</select><ChevronDown size={18} aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-mut"/></div>)}
 export function Contact(){
 const [st,setSt]=useState<'idle'|'sending'|'ok'>('idle')
 async function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const f=e.currentTarget;const d=Object.fromEntries(new FormData(f)) as Record<string,string>
@@ -63,7 +65,7 @@ return(<section id="contact" className={`${wrap} grid gap-12 py-28 md:grid-cols-
 <ul className="mt-8 space-y-3">{[...site.emails.map(e=>[Mail,e,`mailto:${e}`]),...site.team.map(t=>[Github,`GitHub · ${t.name}`,t.github]),...(site.whatsapp?[[MessageCircle,'WhatsApp',site.whatsapp]]:[])].map(([I,l,h])=>{const Ic=I as typeof Mail;return <li key={l as string}><a href={h as string} className="flex items-center gap-3 hover:text-ac"><Ic size={18}/>{l as string}</a></li>})}</ul></div>
 <form onSubmit={submit} className="space-y-4"><div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm">Nombre<input required name="name" className={inp}/></label><label className="block text-sm">Email<input required type="email" name="email" className={inp}/></label></div>
 <label className="block text-sm">Empresa (opcional)<input name="company" className={inp}/></label>
-<div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm">Tipo de proyecto<select name="type" className={inp}>{['Sitio web','Web app','PWA','UI/UX','Otro'].map(o=><option key={o}>{o}</option>)}</select></label>
+<div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm">Tipo de proyecto<Sel name="type" options={['Sitio web','Web app','PWA','UI/UX','Otro']}/></label>
 <label className="block text-sm">Presupuesto aproximado (opcional)<input name="budget" className={inp}/></label></div>
 <label className="block text-sm">Mensaje<textarea required name="message" rows={5} className={inp}/></label>
 <button disabled={st==='sending'} className="rounded-full bg-fg px-7 py-3.5 text-bg disabled:opacity-60">{st==='sending'?'Enviando…':'Start a project'}</button>
