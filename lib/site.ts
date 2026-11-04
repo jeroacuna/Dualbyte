@@ -8,4 +8,7 @@ whatsapp:`https://wa.me/${whatsappNumber}`,
 team:[
 {name:'Jerónimo',github:'https://github.com/jeroacuna'},
 {name:'Bautista',github:'https://github.com/bellodii'}],
-};
+}
+
+// Arma un link de WhatsApp con el mensaje ya escrito.
+export const wa=(text:string)=>`${site.whatsapp}?text=${encodeURIComponent(text)}`

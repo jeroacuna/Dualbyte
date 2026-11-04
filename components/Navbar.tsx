@@ -1,6 +1,7 @@
 'use client'
 import {useEffect,useState} from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {AnimatePresence,motion} from 'motion/react'
 import {Menu,X,Sun,Moon,Monitor} from 'lucide-react'
 const links=[['Home','/'],['About','/#about'],['Projects','/#projects'],['Services','/#services'],['Contact','/#contact']]
@@ -15,7 +16,7 @@ const [s,setS]=useState(false);const [open,setOpen]=useState(false)
 useEffect(()=>{const f=()=>setS(scrollY>24);f();addEventListener('scroll',f,{passive:true});return()=>removeEventListener('scroll',f)},[])
 return(<header className={`fixed inset-x-0 top-0 z-50 transition-all ${s?'border-b border-line bg-bg/70 backdrop-blur-xl':''}`}>
 <nav aria-label="Principal" className="wrap flex h-16 items-center justify-between">
-<Link href="/" className="text-lg font-semibold tracking-tight">Dual<span className="text-ac">Byte</span></Link>
+<Link href="/" className="flex items-center gap-2.5 text-lg font-semibold tracking-tight"><Image src="/logo/logo-192.png" alt="" width={28} height={28} className="rounded-md"/>Dual<span className="text-ac">Byte</span></Link>
 <ul className="hidden items-center gap-7 text-sm md:flex">{links.map(([l,h])=><li key={l}><Link href={h} className="text-mut hover:text-fg">{l}</Link></li>)}</ul>
 <div className="flex items-center gap-3"><Theme/><Link href="/#contact" className="hidden rounded-full bg-fg px-4 py-2 text-sm text-bg md:block">Let&apos;s talk</Link>
 <button className="md:hidden" aria-label={open?'Cerrar menú':'Abrir menú'} aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></div></nav>

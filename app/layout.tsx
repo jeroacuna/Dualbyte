@@ -6,6 +6,8 @@ import Smooth from '@/components/Smooth'
 import Backdrop from '@/components/Backdrop'
 import ScrollBar from '@/components/ScrollBar'
 import Cursor from '@/components/Cursor'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import {Analytics} from '@vercel/analytics/next'
 import Navbar from '@/components/Navbar'
 import {Footer} from '@/components/Sections'
 import {site} from '@/lib/site'
@@ -32,4 +34,4 @@ founder:site.team.map(t=>({'@type':'Person',name:t.name,sameAs:t.github})),sameA
 const themeScript=`try{var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}`
 export default function RootLayout({children}:{children:React.ReactNode}){
 return(<html lang="es-AR" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{__html:themeScript}}/></head>
-<body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Loader/><Smooth/><Backdrop/><ScrollBar/><Cursor/><Navbar/><main>{children}</main><Footer/></body></html>)}
+<body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Loader/><Smooth/><Backdrop/><ScrollBar/><Cursor/><Navbar/><main>{children}</main><Footer/><WhatsAppButton/><Analytics/></body></html>)}

@@ -5,7 +5,9 @@ import {Globe,AppWindow,Smartphone,PenTool,Cpu,Sparkles,Github,Mail,MessageCircl
 import Reveal from './Reveal'
 import Magnetic from './Magnetic'
 import {sendLead} from '@/lib/send'
-import {site} from '@/lib/site'
+import Link from 'next/link'
+import {rubros} from '@/data/rubros'
+import {site,wa} from '@/lib/site'
 const wrap='wrap'
 const h2='text-4xl font-semibold tracking-tight md:text-6xl'
 export function About(){return(<section id="about" className={`${wrap} py-28`}><div className="grid gap-12 md:grid-cols-2">
@@ -16,7 +18,16 @@ export function About(){return(<section id="about" className={`${wrap} py-28`}><
 export function Demo(){return(<section id="demo" className="border-y border-line py-28"><div className={wrap}>
 <Reveal><h2 className={h2}>Primero la demo.<br/><span className="text-mut">Después decidís.</span></h2></Reveal>
 <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">{[['Hablamos','Nos contás qué hace tu negocio y qué necesitás que haga tu web.'],['Armamos una demo','Con tu nombre, tus colores y tu contenido, para que veas cómo quedaría.'],['Decidís con algo en la mano','Si te convence, la terminamos y la publicamos.']].map(([t,d],i)=>
-<Reveal key={t} d={i*.1} className="bg-bg p-7"><p className="font-mono text-sm text-ac">0{i+1}</p><h3 className="mt-6 text-xl font-semibold">{t}</h3><p className="mt-2 text-mut">{d}</p></Reveal>)}</div></div></section>)}
+<Reveal key={t} d={i*.1} className="bg-bg p-7"><p className="font-mono text-sm text-ac">0{i+1}</p><h3 className="mt-6 text-xl font-semibold">{t}</h3><p className="mt-2 text-mut">{d}</p></Reveal>)}</div><DemoForm/></div></section>)}
+function DemoForm(){
+function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const d=Object.fromEntries(new FormData(e.currentTarget)) as Record<string,string>
+const t=['Hola DualByte! Quiero pedir una demo.','',`Rubro: ${d.rubro}`,`Negocio: ${d.negocio}`,d.necesito?`Qué necesito: ${d.necesito}`:false].filter(l=>l!==false).join('\n')
+const u=wa(t);const w=window.open(u,'_blank','noopener,noreferrer');if(!w)window.location.href=u}
+return(<div className="mt-16"><h3 className="text-2xl font-semibold md:text-3xl">Pedí tu demo</h3><p className="mt-1 text-mut">Contanos tu rubro y tu negocio, y seguimos por WhatsApp.</p>
+<form onSubmit={submit} className="mt-6 grid gap-4 md:grid-cols-2"><label className="block text-sm">Rubro<select name="rubro" className={inp}>{['Gimnasio','Barbería','Club o complejo de pádel','Tienda','Gastronomía (café, restaurante)','Otro'].map(o=><option key={o}>{o}</option>)}</select></label>
+<label className="block text-sm">Nombre del negocio<input required name="negocio" className={inp}/></label>
+<label className="block text-sm md:col-span-2">¿Qué necesitás? (opcional)<input name="necesito" className={inp}/></label>
+<button className="w-fit rounded-full bg-fg px-7 py-3.5 text-bg">Pedir demo por WhatsApp</button></form></div>)}
 const services=[[Globe,'Web development','Sitios rápidos, claros y hechos a medida.'],[AppWindow,'Web apps','Herramientas web para gestionar tu negocio.'],[Smartphone,'PWAs','Apps que se instalan desde el navegador.'],[PenTool,'UI/UX','Interfaces pensadas desde quien las usa.'],[Cpu,'Custom software','Software a medida para problemas concretos.'],[Sparkles,'Digital experiences','Interacciones y detalles que se recuerdan.']] as const
 export function Services(){return(<section id="services" className={`${wrap} py-28`}><Reveal><h2 className={h2}>Qué hacemos.</h2></Reveal>
 <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">{services.map(([I,t,d])=>
@@ -57,4 +68,4 @@ return(<section id="contact" className={`${wrap} grid gap-12 py-28 md:grid-cols-
 <label className="block text-sm">Mensaje<textarea required name="message" rows={5} className={inp}/></label>
 <button disabled={st==='sending'} className="rounded-full bg-fg px-7 py-3.5 text-bg disabled:opacity-60">{st==='sending'?'Enviando…':'Start a project'}</button>
 <p role="status" className={`text-sm ${st==='ok'?'text-ac':'text-mut'}`}>{st==='ok'?'Listo: se abrió WhatsApp con tu mensaje. Tocá enviar para que nos llegue.':'Al enviar, se abre WhatsApp con tu mensaje listo.'}</p></form></section>)}
-export function Footer(){return(<footer className="border-t border-line py-8 text-sm text-mut"><div className={`${wrap} flex flex-wrap justify-between gap-2`}><span>© {new Date().getFullYear()} DualByte</span><span>Hecho por Jerónimo y Bautista</span></div></footer>)}
+export function Footer(){return(<footer className="border-t border-line py-8 text-sm text-mut"><div className={`${wrap} flex flex-wrap justify-between gap-2`}><span>© {new Date().getFullYear()} DualByte</span><span>Hecho por Jerónimo y Bautista</span><nav aria-label="Páginas por rubro" className="flex w-full flex-wrap gap-x-5 gap-y-1">{rubros.map(r=><Link key={r.slug} href={`/para/${r.slug}`} className="hover:text-fg">{r.name}</Link>)}</nav></div></footer>)}

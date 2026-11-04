@@ -19,5 +19,6 @@ return(<article className="wrap pb-24 pt-32">
 <div><dt className="text-mut">Categoría</dt><dd>{p.category}</dd></div><div><dt className="text-mut">Tipo</dt><dd>{p.kind}</dd></div>
 <div><dt className="text-mut">Año</dt><dd>{p.year}</dd></div>{p.tech.length>0&&<div><dt className="text-mut">Tecnologías</dt><dd>{p.tech.join(', ')}</dd></div>}</dl>
 <p className="mt-10 max-w-2xl text-xl leading-relaxed">{p.description}</p>
+{p.brief&&<div className="mt-12 grid gap-10 md:grid-cols-2"><div><h2 className="font-mono text-sm text-ac">// el pedido</h2><p className="mt-3 text-xl">{p.brief}</p></div>{p.built&&<div><h2 className="font-mono text-sm text-ac">// lo que construimos</h2><ul className="mt-3 space-y-2 text-lg">{p.built.map(b=><li key={b} className="border-t border-line pt-2">{b}</li>)}</ul></div>}</div>}
 <div className="mt-8 flex gap-3">{p.url&&<a className="rounded-full bg-fg px-5 py-2.5 text-bg" href={p.url}>Ver sitio</a>}{p.github&&<a className="rounded-full border border-line px-5 py-2.5" href={p.github}>GitHub</a>}</div>
 <Link href={`/projects/${next.slug}`} className="mt-20 block border-t border-line pt-8 text-3xl font-semibold hover:text-ac md:text-5xl">Siguiente: {next.name} →</Link></article>)}
