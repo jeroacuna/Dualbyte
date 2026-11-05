@@ -11,6 +11,7 @@ import {Analytics} from '@vercel/analytics/next'
 import Navbar from '@/components/Navbar'
 import {Footer} from '@/components/Sections'
 import {site} from '@/lib/site'
+
 const sans=Space_Grotesk({subsets:['latin'],variable:'--f-sans',display:'swap'})
 const mono=JetBrains_Mono({subsets:['latin'],variable:'--f-mono',display:'swap'})
 const desc='DualByte es un estudio de desarrollo web y software en Paraná, Entre Ríos. Diseñamos y programamos sitios web, aplicaciones web, PWAs y software a medida.'
